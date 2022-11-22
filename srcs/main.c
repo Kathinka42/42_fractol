@@ -6,11 +6,12 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:56:33 by kczichow          #+#    #+#             */
-/*   Updated: 2022/11/18 16:36:59 by kczichow         ###   ########.fr       */
+/*   Updated: 2022/11/22 11:49:28 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../MLX42/include/MLX42/MLX42.h"
+#include "fractol.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -18,7 +19,7 @@
 #define WIDTH 256
 #define HEIGHT 256
 
-mlx_image_t	*g_img;
+static mlx_image_t	*g_img;
 
 int get_rgba(int r, int g, int b, int a)
 {
@@ -49,13 +50,15 @@ int32_t	main(void)
 	mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
 	if (!mlx)
 		exit(EXIT_FAILURE);
-	g_img = mlx_new_image(mlx, 128, 128);
-	memset(g_img->pixels, 255, g_img->width * g_img->height * sizeof(int));
-	mlx_image_to_window(mlx, g_img, 0, 0);
-	mlx_put_pixel(g_img, 10, 10, get_rgba(255, 0, 255 , 0));
+	mlx_image_t *g_img = mlx_new_image(mlx, 128, 128);
+	memset(g_img->pixels, 255, g_img->width * g_img->height * sizeof(int32_t));
+	mlx_image_to_window(mlx, g_img, 10, 10);
+	mlx_put_pixel(g_img, 10 , 64, get_rgba(153, 0, 30 , 0));
 	
 	mlx_loop_hook(mlx, &hook, mlx);
 	mlx_loop(mlx);
+	// mlx_delete_image(mlx, g_img);
+	//mandelbrot();
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
 }

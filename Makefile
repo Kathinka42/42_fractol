@@ -6,21 +6,24 @@
 #    By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 14:15:23 by kczichow          #+#    #+#              #
-#    Updated: 2022/11/18 16:50:15 by kczichow         ###   ########.fr        #
+#    Updated: 2022/11/22 11:02:12 by kczichow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= fractol
-
-SRCS_F		= main.c
+#OS 			= $(shell uname)
  
 # path to directories
 SRCS_D		= ./srcs
 OBJS_D		= ./obj
-SRCS_O		= $(addprefix $(OBJS_D)/, $(SRCS_F:%.c=%.o))
+INC_D		= ./includes
 
-# -I option searches directories for #include directives
-INC_F		= -Iincludes
+# source and objects files
+
+SRCS_F		= main.c \
+			  mandelbrot.c
+
+SRCS_O		= $(addprefix $(OBJS_D)/, $(SRCS_F:%.c=%.o))
 
 # compilation rules and flags
 CC			= gcc
@@ -28,33 +31,46 @@ CFLAGS		= -Wall -Wextra -Werror
 #CFLAGS		= -fsanitize=address -g
 
 # Libft
-LIBFT		= ./libft/libft.a
-LIBFT_D		= libft
+LIBFT_D		= ./libft
+LIBFT_LIB	= $(LIBFT_D)/libft.a
+LIBFT_INC 	= -I $(LIBFT_D)
+LIBFT_LNK	= -L $(LIBFT_D) -l ft
+
+
+# -I option searches directories for #include directives
+#INC_F		= -Iincludes
 
 # -lglfw searches the library glfw
-# -L specifies additional directories to be searched
+# -L specifies additional directories to be searched for libraries (where)
+# -l specifies which lib to search
+
 # MLX lib
-MLX			= ./MLX42/libmlx42.a -lglfw -L ~/.brew/opt/glfw/lib\
-    -framework Cocoa -framework OpenGL -framework IOKit
 MLX_D		= ./MLX42
+MLX_LIB		= $(MLX_D)/libmlx42.a
+MLX_INC 	= -I $(MLX_D)
+MLX_LNK		= -L $(MLX_D) -l mlx42 -lglfw -L ~/.brew/opt/glfw/lib\
+    -framework Cocoa -framework OpenGL -framework IOKit
 
 RM			= rm -rf
 
 all:		$(NAME)
 
-$(NAME): $(LIBFT)
-	 	gcc $(CFLAGS) -o $(NAME) $(MLX) -I includes -L$(LIBFT_D) -l ft main.c
-		  
-			
+#dynamic rule to make sure Makefile does not relink
 
-$(OBJS_D)/%.o: $(SRCS_D)/%.c 
-			$(CC) $(CFLAGS) $(INC_F) -c $< -o $@
+$(NAME): $(LIBFT_LIB) $(MLX_LIB) $(OBJS_D) $(SRCS_O)
+	 	$(CC) $(CFLAGS) -o $(NAME) $(SRCS_O) $(MLX_LNK) $(LIBFT_LNK)
+		  	
+#compiles c files to o files, is called by $(SRCS_O)
+$(OBJS_D)/%.o: $(SRCS_D)/%.c
+			$(CC) $(CFLAGS) $(MLX_INC) $(LIBFT_INC) -I $(INC_D) -c $< -o $@
 
-$(LIBFT):
-	make -C $(LIBFT_D)
+# -j option for multithreading
+$(LIBFT_LIB):
+	make -j -C $(LIBFT_D)
 
-# $(MLX):
-# 	make -C $(MLX_D)
+# -j option for multithreading
+$(MLX_LIB):
+	make -j -C $(MLX_D)
 
 $(OBJS_D):
 	mkdir $@
@@ -62,15 +78,13 @@ $(OBJS_D):
 clean:
 	@$(RM) -rf $(OBJS_D)
 	make clean -C $(LIBFT_D)
-#	make clean -C $(MLX42_D)
+	make clean -C $(MLX_D)
 
-fclean:
-	clean
+fclean: clean
 	$(RM) -f $(NAME) 
 	make fclean -C $(LIBFT_D)
-#	make fclean -C $(MLX42_D)
+	make fclean -C $(MLX_D)
 	
-re:
-	fclean all
+re: fclean all
 
 .PHONY: all clean fclean re
