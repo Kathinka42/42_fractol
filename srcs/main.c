@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:56:33 by kczichow          #+#    #+#             */
-/*   Updated: 2022/11/22 11:49:28 by kczichow         ###   ########.fr       */
+/*   Updated: 2022/12/16 14:56:45 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,31 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <memory.h>
-#define WIDTH 256
-#define HEIGHT 256
+#include <math.h>
 
 static mlx_image_t	*g_img;
 
 int get_rgba(int r, int g, int b, int a)
 {
     return (r << 24 | g << 16 | b << 8 | a);
+}
+
+void my_keyhook(mlx_key_data_t keydata, void *param)
+{
+	// If we PRESS the 'J' key, print "Hello".
+	if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
+		puts("Hello ");
+
+	// If we RELEASE the 'K' key, print "World".
+	if (keydata.key == MLX_KEY_K && keydata.action == MLX_RELEASE)
+		puts("World");
+
+	// If we HOLD the 'L' key, print "!".
+	if (keydata.key == MLX_KEY_L && keydata.action == MLX_REPEAT)
+		puts("!");
+	
+	if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE && keydata.modifier == MLX_CONTROL)
+		puts("Gotta grab it all!");
 }
 
 void	hook(void *param)
@@ -43,22 +60,30 @@ void	hook(void *param)
 		g_img->instances[0].x += 5;
 }
 
-int32_t	main(void)
-{
-	mlx_t	*mlx;
 
-	mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
-	if (!mlx)
-		exit(EXIT_FAILURE);
-	mlx_image_t *g_img = mlx_new_image(mlx, 128, 128);
-	memset(g_img->pixels, 255, g_img->width * g_img->height * sizeof(int32_t));
-	mlx_image_to_window(mlx, g_img, 10, 10);
-	mlx_put_pixel(g_img, 10 , 64, get_rgba(153, 0, 30 , 0));
+
+//Find out how the memset function works in this context;
+
+// int32_t	main(void)
+// {
+// 	mlx_t	*mlx;
+
+// 	mlx = mlx_init(WIDTH, HEIGHT, "My first window", true);
+// 	if (!mlx)
+// 		exit(EXIT_FAILURE);
+// 	mlx_key_hook(mlx, &my_keyhook, NULL);
+// 	mlx_scroll_hook(mlx, &mouse_scroll, NULL);
+// 	g_img = mlx_new_image(mlx, 800, 800);
+// 	memset(g_img->pixels, 255, g_img->width * g_img->height * sizeof(int32_t));
 	
-	mlx_loop_hook(mlx, &hook, mlx);
-	mlx_loop(mlx);
-	// mlx_delete_image(mlx, g_img);
-	//mandelbrot();
-	mlx_terminate(mlx);
-	return (EXIT_SUCCESS);
-}
+// 	draw_line(g_img, mlx);
+	
+// 	//mlx_put_pixel(g_img, 20 , 20, get_rgba(153, 150, 150 , 0));
+	
+// 	mlx_loop_hook(mlx, &hook, mlx);
+// 	mlx_loop(mlx);
+// 	mlx_delete_image(mlx, g_img); // clean up once the application requests an exit
+// 	//mandelbrot();
+// 	mlx_terminate(mlx);
+// 	return (EXIT_SUCCESS);
+// }
