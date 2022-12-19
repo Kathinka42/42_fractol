@@ -6,7 +6,7 @@
 #    By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 14:15:23 by kczichow          #+#    #+#              #
-#    Updated: 2022/11/22 11:02:12 by kczichow         ###   ########.fr        #
+#    Updated: 2022/12/19 16:59:05 by kczichow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,23 @@ INC_D		= ./includes
 # source and objects files
 
 SRCS_F		= main.c \
-			  mandelbrot.c
+			  ft_strncmp.c \
+			  check_input.c \
+			  param_is_valid.c \
+			  allocate_memory.c \
+			  scale_pixel_to_coordinates.c \
+			  count_iterations.c \
+			  draw_fractal.c \
+			  mandelbrot.c \
+			  fractol.c \
+			  event_mouse_scroll.c \
+			  temp_drawing_experiments.c
 
 SRCS_O		= $(addprefix $(OBJS_D)/, $(SRCS_F:%.c=%.o))
 
 # compilation rules and flags
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+#CFLAGS		= -Wall -Wextra -Werror
 #CFLAGS		= -fsanitize=address -g
 
 # Libft
@@ -58,7 +68,7 @@ all:		$(NAME)
 #dynamic rule to make sure Makefile does not relink
 
 $(NAME): $(LIBFT_LIB) $(MLX_LIB) $(OBJS_D) $(SRCS_O)
-	 	$(CC) $(CFLAGS) -o $(NAME) $(SRCS_O) $(MLX_LNK) $(LIBFT_LNK)
+	 	$(CC) -o $(NAME) $(SRCS_O) $(MLX_LNK) $(LIBFT_LNK)
 		  	
 #compiles c files to o files, is called by $(SRCS_O)
 $(OBJS_D)/%.o: $(SRCS_D)/%.c
