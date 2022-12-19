@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:43:44 by kczichow          #+#    #+#             */
-/*   Updated: 2022/12/19 15:03:02 by kczichow         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:10:13 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,8 @@ void	allocate_memory(t_image *image)
 		return ;
 	image->coordinates = ft_calloc(1, sizeof(t_coordinates));
 	if (!image->coordinates)
+		return ;
+	image->set = ft_calloc(1, sizeof(t_set));
+	if (!image->set)
 		return ;
 }
