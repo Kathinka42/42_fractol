@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 14:25:40 by kczichow          #+#    #+#             */
-/*   Updated: 2022/12/16 14:29:00 by kczichow         ###   ########.fr       */
+/*   Created: 2022/03/25 13:57:57 by kczichow          #+#    #+#             */
+/*   Updated: 2022/12/19 15:09:01 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../MLX42/include/MLX42/MLX42.h"
-#include "fractol.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <memory.h>
-#include <math.h>
-
-/*	FT_STRCMP
+/*	FT_STRNCMP
 *	-------------
 *	DESCRIPTION
-*	The function lexicographically compares the characters of two strings.
+*	The function lexicographically compares n characters of two strings.
+*	Lexicographically bigger or smaller depends on the order in the alphabet
+*	(a<b);
 */
 
-int	ft_strcmp(const char *str1, const char *str2)
+#include "fractol.h"
+
+int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {
 	size_t	i;
 
 	i = 0;
-	
-	while (str1[i] && str2[i])
+	if (n == 0)
+		return (0);
+	while ((i < (n - 1)) && str1[i] != '\0' && str2[i] != '\0')
 	{
 		if (str1[i] == str2[i])
-			i++;
+		i++;
 		else
-			return ((unsigned char) str1[i] - (unsigned char) str2[i]);
+			return ((unsigned char)str1[i] - (unsigned char) str2[i]);
 	}
 	return ((unsigned char) str1[i] - (unsigned char) str2[i]);
 }
