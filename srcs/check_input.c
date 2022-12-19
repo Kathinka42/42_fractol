@@ -6,38 +6,28 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:02:21 by kczichow          #+#    #+#             */
-/*   Updated: 2022/12/16 15:18:07 by kczichow         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:38:30 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int is_valid(char *s, t_var *var)
-{
-	var->i = 0;
+/*	CHECK_INPUT
+*	--------------
+*	Function distinguishes between input sets. If Julia, it also checks for
+*	valid input parameters. If input is valid, function returns 0.
+*/
 
-	while (s[var->i] != '\0')
-	{
-		if ((s[var->i] == 43 || s[var->i] == 45)
-			&& (!(s[var->i + 1] == 46 
-			|| (s[var->i + 1] >= 48 && s[var->i + 1] <= 57))))
-			return (0);
-		if (!((s[var->i] >= 48 && s[var->i] <= 57)
-				|| s[var->i] == 43 || s[var->i] == 45 || s[var->i] == 46))
-			return (0);
-		var->i++;
-	}
-	return (1);
-}
-
-int	check_input(int argc, char **argv, t_var *var)
+int	check_input(int argc, char **argv, t_image *image)
 {
-	if(argc < 2 || argc == 3 || argc > 4)
+	if	(argc < 2 || argc == 3 || argc > 4)
 		return (-1);
-	if (argc == 2 && !ft_strcmp("Mandelbrot", argv[1]))
+	else if (argc == 2 && ft_strncmp(argv[1], "Mandelbrot", 11))
 		return (-1);
-	if (argc == 4 && !(is_valid(argv[2], var) && is_valid(argv[3], var)
-		&& (!ft_strcmp(argv[1], "Julia"))))
-		return (-1);
+	printf("argv2: %d\n", param_is_valid(argv[2], image));
+	printf("argv3: %d\n", param_is_valid(argv[3], image));
+	// if (argc == 4 && !ft_strncmp("Julia", argv[1], 6)
+	// 	&& param_is_valid(argv[2], image) && param_is_valid(argv[3], image))
+	// 	return (-1);
 	return (0);
 }
