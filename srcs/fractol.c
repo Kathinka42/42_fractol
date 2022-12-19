@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 10:54:21 by kczichow          #+#    #+#             */
-/*   Updated: 2022/12/16 15:14:04 by kczichow         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:57:26 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,25 @@
 #include <memory.h>
 #include <math.h>
 
-static mlx_image_t	*g_img;
+// static mlx_image_t	*g_img;
 
-void	fractol(char **argv, t_var *var)
+void	fractol(char **argv, t_image *image)
 {
-	mlx_t	*mlx;
-		
 	//if (var->settype == 1)
-	mlx = mlx_init(WIDTH, HEIGHT, "Mandelbrot", true);
-	if (!mlx)
+	image->mlx = mlx_init(WIDTH, HEIGHT, "Mandelbrot", true);
+	if (!image->mlx)
 		exit(EXIT_FAILURE);
-	g_img = mlx_new_image(mlx, WIDTH, HEIGHT);
-	memset(g_img->pixels, 255, g_img->width * g_img->height * sizeof(int32_t));
+	//exit (0);
+	image->g_img = mlx_new_image(image->mlx, WIDTH, HEIGHT);
+	memset(image->g_img->pixels, 255, image->g_img->width * image->g_img->height * sizeof(int32_t));
 
 	//mlx_loop_hook(mlx, &hook, mlx);
-	mlx_loop(mlx);
-	mlx_delete_image(mlx, g_img); // clean up once the application requests an exit
+	draw_fractal(image);
+	mlx_image_to_window(image->mlx, image->g_img, 0, 0);
+	mlx_loop(image->mlx);
+	//mlx_delete_image(image->mlx, image->g_img); // clean up once the application requests an exit
 	//mandelbrot();
-	mlx_terminate(mlx);
+	mlx_terminate(image->mlx);
 	return ;
 }
 
@@ -49,14 +50,15 @@ void	fractol(char **argv, t_var *var)
 
 int main (int argc, char **argv)
 {
-	t_var *var;
+	t_image *image;
 
-	var = malloc(sizeof(var));
-	if (!var)
+	image = malloc(sizeof(t_image));
+	if (!image)
 		return (0);
-	init_variables(var);
-	if (check_input(argc, argv, var))
-		fractol(argv, var);
-		
+	allocate_memory(image);
+	//exit (0);
+	
+	// printf("%d\n", check_input(argc, argv, var));
+	fractol(argv, image);
 	return (0);
 }
