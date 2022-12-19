@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 14:43:44 by kczichow          #+#    #+#             */
-/*   Updated: 2022/12/19 17:10:13 by kczichow         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:40:06 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 
 void	allocate_memory(t_image *image)
 {	
-	image->var = ft_calloc(1, sizeof(t_var));
-	if (!image->var)
-		return ;
 	image->pixel = ft_calloc(1, sizeof(t_pixel));
 	if (!image->pixel)
 		return ;
