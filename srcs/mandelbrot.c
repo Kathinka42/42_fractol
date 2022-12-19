@@ -6,24 +6,29 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:52:03 by kczichow          #+#    #+#             */
-/*   Updated: 2022/12/16 10:12:03 by kczichow         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:08:25 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-typedef struct {unsigned char r, g, b;} rgb_t;
-rgb_t **tex = 0;
-int gwin;
-//GLuint texture;
-int width, height;
-int tex_w, tex_h;
-double scale = 1./256;
-double cx = -.6, cy = 0;
-int color_rotate = 0;
-int saturation = 1;
-int invert = 0;
-int max_iter = 256;
+
+
+
+
+
+// typedef struct {unsigned char r, g, b;} rgb_t;
+// rgb_t **tex = 0;
+// int gwin;
+// //GLuint texture;
+// int width, height;
+// int tex_w, tex_h;
+// double scale = 1./256;
+// double cx = -.6, cy = 0;
+// int color_rotate = 0;
+// int saturation = 1;
+// int invert = 0;
+// int max_iter = 256;
 
 // https://rosettacode.org/wiki/Mandelbrot_set#C
 
