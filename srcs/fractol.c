@@ -6,19 +6,11 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 10:54:21 by kczichow          #+#    #+#             */
-/*   Updated: 2022/12/20 15:03:18 by kczichow         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:57:49 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../MLX42/include/MLX42/MLX42.h"
 #include "fractol.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <memory.h>
-#include <math.h>
-
-// static mlx_image_t	*g_img;
 
 void	fractol(char **argv, t_image *image)
 {
@@ -26,7 +18,6 @@ void	fractol(char **argv, t_image *image)
 	image->mlx = mlx_init(WIDTH, HEIGHT, "Mandelbrot", true);
 	if (!image->mlx)
 		exit(EXIT_FAILURE);
-	//exit (0);
 	image->g_img = mlx_new_image(image->mlx, WIDTH, HEIGHT);
 	memset(image->g_img->pixels, 255, image->g_img->width * image->g_img->height * sizeof(int32_t));
 
@@ -57,9 +48,7 @@ int main (int argc, char **argv)
 	if (!image)
 		return (0);
 	allocate_memory(image);
-	// exit (0);
-	
-	// printf("%d\n", check_input(argc, argv, var));
+	init_set(image->set);
 	fractol(argv, image);
 	return (0);
 }

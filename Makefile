@@ -6,7 +6,7 @@
 #    By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 14:15:23 by kczichow          #+#    #+#              #
-#    Updated: 2022/12/19 16:59:05 by kczichow         ###   ########.fr        #
+#    Updated: 2022/12/20 15:18:58 by kczichow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS_F		= main.c \
 			  check_input.c \
 			  param_is_valid.c \
 			  allocate_memory.c \
+			  init_set.c \
 			  scale_pixel_to_coordinates.c \
 			  count_iterations.c \
 			  draw_fractal.c \

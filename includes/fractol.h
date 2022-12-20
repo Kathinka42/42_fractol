@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:33:12 by kczichow          #+#    #+#             */
-/*   Updated: 2022/12/20 14:49:28 by kczichow         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:41:08 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct s_image
 	t_set			*set;
 	t_coordinates	*coordinates;
 	int				i;
+	int				pix_x;
+	int				pix_y;
 	t_pixel			*pixel;
 }t_image;
 
@@ -74,15 +76,16 @@ typedef struct s_image
 # endif
 
 // input checking
-int	ft_strncmp(const char *str1, const char *str2, size_t n);
-int	check_input(int argc, char **argv, t_image *image);
-int param_is_valid(char *s, t_image *image);
-void allocate_memory(t_image *image);
+int		ft_strncmp(const char *str1, const char *str2, size_t n);
+int		check_input(int argc, char **argv, t_image *image);
+int		param_is_valid(char *s, t_image *image);
+void	allocate_memory(t_image *image);
+void	init_set(t_set *set);
 
 void	draw_fractal(t_image *image);
-int	count_iterations(t_image *image);
+int	count_iterations(t_set *set);
 
-void	scale_pixel_to_coordinates(t_image *image);
+void	scale_pixel_to_coordinates(t_image *image, t_set *set);
 void	mandelbrot();
 void	fractol(char **argv, t_image *image);
 int get_rgba(int r, int g, int b, int a);
