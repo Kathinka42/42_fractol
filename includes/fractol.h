@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:33:12 by kczichow          #+#    #+#             */
-/*   Updated: 2022/12/19 17:50:30 by kczichow         ###   ########.fr       */
+/*   Updated: 2022/12/20 14:49:28 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,18 @@
 typedef struct s_set
 {
 	int settype;
-	int	iter;
-	int count;
+	int	max_iter;
+	int iter;
 	double	z_real;
 	double	z_imag;
 	double	c_real;
 	double	c_imag;
 	double	z_sq_real;
 	double	z_sq_imag;
+	double	min_imag;
+	double	max_imag;
+	double	min_real;
+	double	max_real;
 }	t_set;
 
 typedef struct s_pixel
@@ -42,12 +46,12 @@ typedef struct s_pixel
 
 typedef struct s_coordinates
 {
-	double	imag_y_max;
-	double	imag_y_min;
-	double	x_min;
-	double	x_max;
-	double	x;
-	double	imag_y;
+	double	imag_y_max; // max_imag
+	double	imag_y_min; // min_imag
+	double	x_min; // min_real
+	double	x_max; // max_real
+	double	x;	// not used
+	double	imag_y; //not used
 	double	z;
 }t_coordinates;
 
@@ -55,10 +59,10 @@ typedef struct s_image
 {
 	mlx_t			*mlx;
 	mlx_image_t		*g_img;
-	t_pixel			*pixel;
 	t_set			*set;
 	t_coordinates	*coordinates;
 	int				i;
+	t_pixel			*pixel;
 }t_image;
 
 # ifndef WIDTH

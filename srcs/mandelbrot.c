@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:52:03 by kczichow          #+#    #+#             */
-/*   Updated: 2022/12/19 15:08:25 by kczichow         ###   ########.fr       */
+/*   Updated: 2022/12/20 12:27:53 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 
 
-
+// the mandelbrot algorithm , for each point starts with zero and add a changing
+// constant
 
 // typedef struct {unsigned char r, g, b;} rgb_t;
 // rgb_t **tex = 0;
@@ -74,7 +75,7 @@
 // 	rgb_t *px;
 // 	double x, y, zx, zy, zx2, zy2;
 // 	min = max_iter; max = 0;
-// 	for (var->i = 0; var->i < height; i++) {
+// 	for (i = 0; i < height; i++) {
 // 		px = tex[i];
 // 		y = (i - height/2) * scale + cy;
 // 		for (j = 0; j  < width; j++, px++) {

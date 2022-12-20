@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 10:54:21 by kczichow          #+#    #+#             */
-/*   Updated: 2022/12/19 16:57:26 by kczichow         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:03:18 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	fractol(char **argv, t_image *image)
 
 	//mlx_loop_hook(mlx, &hook, mlx);
 	draw_fractal(image);
+	//exit(0);
 	mlx_image_to_window(image->mlx, image->g_img, 0, 0);
 	mlx_loop(image->mlx);
 	//mlx_delete_image(image->mlx, image->g_img); // clean up once the application requests an exit
@@ -56,7 +57,7 @@ int main (int argc, char **argv)
 	if (!image)
 		return (0);
 	allocate_memory(image);
-	//exit (0);
+	// exit (0);
 	
 	// printf("%d\n", check_input(argc, argv, var));
 	fractol(argv, image);

@@ -6,27 +6,37 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 15:45:38 by kczichow          #+#    #+#             */
-/*   Updated: 2022/12/19 17:51:32 by kczichow         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:11:12 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+/*	DRAW_FRACTOL
+*	-------------
+*	
+*/
 
 void	draw_fractal(t_image *image)
 {
 	int iter = 0;
 	image->pixel->x = 0;
 	image->pixel->y = 0;
-	while (image->pixel->x <= WIDTH)
+	// exit (0);
+	while (image->pixel->x < WIDTH)
 	{
-		//printf("%f\n", image->pixel->x);
 		image->pixel->y = 0;
-		while (image->pixel->y <= HEIGHT)
+		printf("%d\n", image->pixel->x);
+		// exit(0);
+		
+		while (image->pixel->y < HEIGHT)
 		{
 			scale_pixel_to_coordinates(image);
 			iter = count_iterations(image);
+			printf("%d\n", iter);
+			if (iter < image->set->max_iter)
+				mlx_put_pixel(image->g_img, image->pixel->x , image->pixel->y, get_rgba(0, 0, 0 , 255));
 			//put_color(image, iter);
-			mlx_put_pixel(image->g_img, image->coordinates->x , image->coordinates->imag_y, get_rgba(255, 0, 255 , 255));
 			image->pixel->y++;
 		}
 		image->pixel->x++;

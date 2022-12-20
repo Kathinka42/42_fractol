@@ -1,6 +1,13 @@
 {
 	"files.associations": {
 		"stdlib.h": "c",
-		"stdbool.h": "c"
+		"stdbool.h": "c",
+		"stdio.h": "c",
+		"mlx42.h": "c",
+		"__bit_reference": "c",
+		"algorithm": "c",
+		"bitset": "c",
+		"chrono": "c",
+		"unordered_map": "c"
 	}
 }
