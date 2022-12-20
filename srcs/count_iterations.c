@@ -6,48 +6,49 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 15:14:09 by kczichow          #+#    #+#             */
-/*   Updated: 2022/12/20 15:09:42 by kczichow         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:50:37 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	calculate_next_iteration(t_image *image)
+/*	CALCULATE_NEXT_ITERATION
+*	-------------------------
+*	Function calculates the next interation of Z, split up into both the real
+*	and the imaginary part.
+*	Basis function if Z(n+1) = Z(n)*Z(n) + C, where C = c_imag + c_real,
+*	which are the input parameters to the count_iterations function.
+*/
+
+void	calculate_next_iteration(t_set *set)
 {
 	double	tmp_imag;
-	
-	tmp_imag = 2 * image->set->z_real * image->set->z_imag + image->set->c_imag;
-	image->set->z_real = pow(image->set->z_real, 2) - pow(image->set->z_imag, 2) + image->set->c_real;
-	image->set->z_imag = tmp_imag;
-	// image->set->z_real = image->set->z_real * image->set->z_real - image->set->z_imag *image->set->z_imag + image->set->c_real;
 
-	// printf("z_imag : %f\n", image->set->z_imag);
-	// printf("z_real : %f\n", image->set->z_real);
+	tmp_imag = 2 * set->z_real * set->z_imag + set->c_imag;
+	set->z_real = pow(set->z_real, 2) - pow(set->z_imag, 2) + set->c_real;
+	set->z_imag = tmp_imag;
 }
 
-
 /*	COUNT_ITERATIONS
-*	function breaks, if Z goes out of the set. Its result determines, if a
-*	certain point is within the set(count = max_iter), at the border or outside
-*	the set.
+*	-------------------
+*	Function counts the number of iterations for a particular point in the
+*	coordinate system, for which Z remains within the boundaries of the set.
+*	Z alwazs starts from the center (0,0).
+*	For readability reasons, some variables are initialized here.
 */
-int	count_iterations(t_image *image)
+
+int	count_iterations(t_set *set)
 {
-	image->set->iter = 0;
-	image->set->max_iter = 50;
-	image->set->z_real = 0.0;
-	image->set->z_imag = 0.0;
-	
-	// printf("iter is%d\n", image->set->iter);
-	// printf("max_iter is%d\n", image->set->max_iter);
-	while (image->set->iter < image->set->max_iter)
+	set->iter = 0;
+	set->max_iter = 50;
+	set->z_real = 0.0;
+	set->z_imag = 0.0;
+	while (set->iter < set->max_iter)
 	{
-		if(sqrt((pow(image->set->z_real, 2) + pow(image->set->z_imag, 2))) > 2)
-			return (image->set->iter);
-		calculate_next_iteration(image);
-		image->set->iter++;
-		// printf("%d\n", image->set->iter);
+		if (sqrt((pow(set->z_real, 2) + pow(set->z_imag, 2))) > 2)
+			return (set->iter);
+		calculate_next_iteration(set);
+		set->iter++;
 	}
-	// printf("%d\n", image->set->iter);
-	return (image->set->iter);
+	return (set->iter);
 }
