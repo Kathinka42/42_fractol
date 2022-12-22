@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:33:12 by kczichow          #+#    #+#             */
-/*   Updated: 2022/12/20 15:41:08 by kczichow         ###   ########.fr       */
+/*   Updated: 2022/12/22 14:32:32 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct s_set
 	double	max_imag;
 	double	min_real;
 	double	max_real;
+	double	new_height;
+	double	new_width;
 }	t_set;
 
 typedef struct s_pixel
