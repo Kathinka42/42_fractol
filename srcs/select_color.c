@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:46:38 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/10 15:28:22 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:52:33 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,23 +116,31 @@ int	select_color(int iter, t_image *image)
 }
 
 //greenbriar: 4b9b69
-
 // double a = n+2 - log(log(zr*zr+zi*zi))/M_LN2;
 // sn = n - log2log2(z * z ) + k;
 
-// uint32_t    to_rgb(uint8_t red, uint8_t green, uint8_t blue)
-// {
-//     return ((uint32_t)(red << 24 | green << 16 | blue << 8 | 0xFF));
-// }
-uint32_t    generate_colors(int iter, t_set *set)
+void		put_pixel(t_image *image, int x, int y)
 {
-    double  ratio;
+	uint32_t color;
+
+	if (image->set->iter == image->set->max_iter)
+		mlx_put_pixel(image->g_img, x, y, 0x0035036a);
+	else
+		color = generate_colors(image);
+		mlx_put_pixel(image->g_img, x, y, color);
+}
+
+uint32_t    generate_colors(t_image *image)
+{
+    t_set	*set;
+	double  ratio;
     double  ratio_reciprocal;
     uint8_t colors[3];
-    ratio = (double)iter / (double)set->max_iter;
+	
+	set = image->set;
+    ratio = (double)set->iter / (double)set->max_iter;
     ratio_reciprocal = 1.0 - ratio;
     colors[0] = 9 * (ratio * ratio * ratio) * ratio_reciprocal * 255;
-	// printf()
     colors[1] = 15 * (ratio * ratio) * (ratio_reciprocal * ratio_reciprocal) * 255;
     colors[2] = 9 * ratio * (ratio_reciprocal * ratio_reciprocal * ratio_reciprocal) * 255;
 	// printf("%d\n", get_rgba(colors[set->i], colors[set->j], colors[set->k]));
