@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 15:45:38 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/10 15:07:45 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:53:45 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ void	draw_fractal(t_image *image)
 		{
 			image->set->c_re = image->set->min_re + pix_x * image->set->coef_re;
 			image->set->iter = count_iterations(image->set);
-			//generate_colors()
+			// put_pixel(image, pix_x, pix_y);
 			if (image->set->iter < image->set->max_iter)
-			// 	printf("%d\n", iter);
-				mlx_put_pixel(image->g_img, pix_x, pix_y, generate_colors(image->set->iter, image->set));
+				mlx_put_pixel(image->g_img, pix_x, pix_y, generate_colors(image));
 			else
 				mlx_put_pixel(image->g_img, pix_x, pix_y, 0xFFFFFFFF);
 				// mlx_put_pixel(image->g_img, image->pix_x , image->pix_y, get_rgba(0, 0, 0));
@@ -50,5 +49,5 @@ void	draw_fractal(t_image *image)
 		}
 		pix_y++;
 	}
-	// mlx_image_to_window(image->mlx, image->g_img, image->pix_x, image->pix_y);
+	// mlx_image_to_window(image->mlx, image->g_img, pix_x, pix_y);
 }
