@@ -6,7 +6,7 @@
 #    By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 14:15:23 by kczichow          #+#    #+#              #
-#    Updated: 2023/01/10 14:49:27 by kczichow         ###   ########.fr        #
+#    Updated: 2023/01/10 15:36:36 by kczichow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ SRCS_F		= main.c \
 			  get_rgba.c \
 			  mandelbrot.c \
 			  fractol.c \
-			  event_mouse_scroll.c \
 			  temp_drawing_experiments.c \
 			  zoom.c
 
