@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 15:14:09 by kczichow          #+#    #+#             */
-/*   Updated: 2022/12/20 15:50:37 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/10 10:06:39 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 
 void	calculate_next_iteration(t_set *set)
 {
-	double	tmp_imag;
+	double	tmp_im;
 
-	tmp_imag = 2 * set->z_real * set->z_imag + set->c_imag;
-	set->z_real = pow(set->z_real, 2) - pow(set->z_imag, 2) + set->c_real;
-	set->z_imag = tmp_imag;
+	tmp_im = 2 * set->z_re * set->z_im + set->c_im;
+	set->z_re = pow(set->z_re, 2) - pow(set->z_im, 2) + set->c_re;
+	set->z_im = tmp_im;
 }
 
 /*	COUNT_ITERATIONS
@@ -40,12 +40,12 @@ void	calculate_next_iteration(t_set *set)
 int	count_iterations(t_set *set)
 {
 	set->iter = 0;
-	set->max_iter = 50;
-	set->z_real = 0.0;
-	set->z_imag = 0.0;
+	set->max_iter = 200;
+	set->z_re = 0.0;
+	set->z_im = 0.0;
 	while (set->iter < set->max_iter)
 	{
-		if (sqrt((pow(set->z_real, 2) + pow(set->z_imag, 2))) > 2)
+		if (sqrt((pow(set->z_re, 2) + pow(set->z_im, 2))) > 2)
 			return (set->iter);
 		calculate_next_iteration(set);
 		set->iter++;
