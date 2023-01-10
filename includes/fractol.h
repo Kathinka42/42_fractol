@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:33:12 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/10 14:49:19 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:44:45 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ void		mandelbrot();
 void		fractol(char **argv, t_image *image);
 int			select_color(int iter, t_image *image);
 uint32_t	get_rgba(uint8_t red, uint8_t green, uint8_t blue);
-uint32_t    generate_colors(int iter, t_set *set);
+uint32_t    generate_colors(t_image *image);
+void		put_pixel(t_image *image, int x, int y);
 
 // events
 
