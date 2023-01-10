@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 09:16:19 by kczichow          #+#    #+#             */
-/*   Updated: 2022/12/19 17:47:35 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:18:39 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,27 @@
 
 int	param_is_valid(char *s, t_image *image)
 {
-	image->i = 0;
-	while (s[image->i] != '\0')
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
 	{
-		if (s[image->i] == '+' || s[image->i] == '-')
-			image->i++;
-		if (s[image->i] >= '0' && s[image->i] <= '9')
+		if (s[i] == '+' || s[i] == '-')
+			i++;
+		if (s[i] >= '0' && s[i] <= '9')
 		{
-			image->i++;
-			if (s[image->i] == '.')
+			i++;
+			if (s[i] == '.')
 			{
-				image->i++;
-				if (s[image->i] >= '0' && s[image->i] <= '9')
+				i++;
+				if (s[i] >= '0' && s[i] <= '9')
 				{
-					image->i++;
+					i++;
 					return (0);
 				}
 			}
 		}
-	image->i++;
+	i++;
 	}
 	return (-1);
 }
