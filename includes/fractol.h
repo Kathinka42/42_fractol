@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:33:12 by kczichow          #+#    #+#             */
-/*   Updated: 2022/12/22 14:32:32 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:49:19 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,31 @@ typedef struct s_set
 	int settype;
 	int	max_iter;
 	int iter;
-	double	z_real;
-	double	z_imag;
-	double	c_real;
-	double	c_imag;
-	double	z_sq_real;
-	double	z_sq_imag;
-	double	min_imag;
-	double	max_imag;
-	double	min_real;
-	double	max_real;
+	double	zoom;
+	double	z_re;
+	double	z_im;
+	double	c_re;
+	double	c_im;
+	double	z_sq_re;
+	double	z_sq_im;
+	double	min_im;
+	double	max_im;
+	double	min_re;
+	double	max_re;
+	double	coef_im;
+	double	coef_re;
+	double	height_of_axe;
+	double	width_of_axe;
 	double	new_height;
 	double	new_width;
+	double	r;
+	double	g;
+	double	b;
+	double	a;
+	int		i;
+	int		j;
+	int		k;
 }	t_set;
-
-typedef struct s_pixel
-{
-	int	x;
-	int	y;
-}t_pixel;
 
 typedef struct s_coordinates
 {
@@ -63,10 +69,7 @@ typedef struct s_image
 	mlx_image_t		*g_img;
 	t_set			*set;
 	t_coordinates	*coordinates;
-	int				i;
-	int				pix_x;
-	int				pix_y;
-	t_pixel			*pixel;
+	// int				i;
 }t_image;
 
 # ifndef WIDTH
@@ -84,17 +87,19 @@ int		param_is_valid(char *s, t_image *image);
 void	allocate_memory(t_image *image);
 void	init_set(t_set *set);
 
-void	draw_fractal(t_image *image);
-int	count_iterations(t_set *set);
+void		draw_fractal(t_image *image);
+int			count_iterations(t_set *set);
 
-void	scale_pixel_to_coordinates(t_image *image, t_set *set);
-void	mandelbrot();
-void	fractol(char **argv, t_image *image);
-int get_rgba(int r, int g, int b, int a);
+void		mandelbrot();
+void		fractol(char **argv, t_image *image);
+int			select_color(int iter, t_image *image);
+uint32_t	get_rgba(uint8_t red, uint8_t green, uint8_t blue);
+uint32_t    generate_colors(int iter, t_set *set);
 
 // events
 
 void mouse_scroll(double xdelta, double ydelta, mlx_image_t *g_img, mlx_t *mlx);
+void my_scrollhook(double xdelta, double ydelta, void *param);
 
 // temporary test functions
 void	draw_circle(mlx_image_t *g_img, mlx_t *mlx, int xc, int yc, int x, int y);
