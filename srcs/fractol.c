@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 10:54:21 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/10 15:25:33 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:40:14 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 void	fractol(char **argv, t_image *image)
 {
 	//if (var->settype == 1)
-	image->mlx = mlx_init(WIDTH, HEIGHT, "Mandelbrot", true);
-	if (!image->mlx)
-		exit(EXIT_FAILURE);
+	
 	image->g_img = mlx_new_image(image->mlx, WIDTH, HEIGHT);
 	memset(image->g_img->pixels, 255, image->g_img->width * image->g_img->height * sizeof(int32_t));
 
 	//mlx_loop_hook(mlx, &hook, mlx);
+	mlx_key_hook(image->mlx, &my_keyhook, image);
 	mlx_scroll_hook(image->mlx, &my_scrollhook, image);
 	draw_fractal(image);
 	//exit(0);
@@ -46,7 +45,8 @@ int main (int argc, char **argv)
 	if (!image)
 		return (0);
 	allocate_memory(image);
-	init_set(image->set);
+	check_input(argc, argv, image);
+	init_set(image);
 	fractol(argv, image);
 	return (0);
 }
