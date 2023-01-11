@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 15:14:09 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/10 10:06:39 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/11 09:20:01 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,18 @@ void	calculate_next_iteration(t_set *set)
 *	-------------------
 *	Function counts the number of iterations for a particular point in the
 *	coordinate system, for which Z remains within the boundaries of the set.
-*	Z alwazs starts from the center (0,0).
+*	Z always starts from the center (0,0).
 *	For readability reasons, some variables are initialized here.
 */
 
 int	count_iterations(t_set *set)
 {
 	set->iter = 0;
-	set->max_iter = 200;
 	set->z_re = 0.0;
 	set->z_im = 0.0;
-	while (set->iter < set->max_iter)
+	while (set->iter < set->max_iter
+			&& (pow(set->z_re, 2) + pow(set->z_im, 2)) < 4.0)
 	{
-		if (sqrt((pow(set->z_re, 2) + pow(set->z_im, 2))) > 2)
-			return (set->iter);
 		calculate_next_iteration(set);
 		set->iter++;
 	}
