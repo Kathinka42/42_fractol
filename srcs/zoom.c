@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:18:06 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/10 15:10:09 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/11 10:37:52 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	zoom_in(t_image *image)
 	t_set	*set;
 
 	set = image->set;
-	set->max_im = set->max_im * 1.1;
-	set->min_im = set->min_im * 1.1;
-	set->max_re = set->max_re * 1.1;
-	set->min_re = set->min_re * 1.1;
+	set->max_im = set->max_im + 0.05;
+	set->min_im = set->min_im - 0.05;
+	set->max_re = set->max_re + 0.05;
+	set->min_re = set->min_re - 0.05;
 }
 
 /*	ZOOM_OUT
@@ -38,10 +38,10 @@ void	zoom_out(t_image *image)
 	t_set	*set;
 
 	set = image->set;
-	set->max_im = set->max_im * 0.9;
-	set->min_im = set->min_im * 0.9;
-	set->max_re = set->max_re * 0.9;
-	set->min_re = set->min_re * 0.9;
+	set->max_im = set->max_im - 0.05;
+	set->min_im = set->min_im + 0.05;
+	set->max_re = set->max_re - 0.05;
+	set->min_re = set->min_re + 0.05;
 }
 
 /*	MY_SCROLLHOOK
