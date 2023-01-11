@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 09:16:19 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/10 15:18:39 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:45:57 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 *	is correct, the function returns 0.
 */
 
-int	param_is_valid(char *s, t_image *image)
+int	param_is_valid(char *s)
 {
 	int	i;
 
@@ -37,11 +37,11 @@ int	param_is_valid(char *s, t_image *image)
 				if (s[i] >= '0' && s[i] <= '9')
 				{
 					i++;
-					return (0);
+					return (-1);
 				}
 			}
 		}
 	i++;
 	}
-	return (-1);
+	return (0);
 }
