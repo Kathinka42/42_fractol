@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:46:38 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/10 15:52:33 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/11 10:19:24 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,85 +57,28 @@ int	get_color(int n, t_image *image)
 	return(color[n]);
 }
 
-// int get_rgba(int r, int g, int b, int a)
-// {
-//     return (r << 24 | g << 16 | b << 8 | a);
-// }
-
-// int convert_hex(int i, t_image *image)
-// {
-// 	image->set->r = (i >> 16 & 0xFF) / 255;
-// 	image->set->g = (i >> 8 & 0xFF) / 255;
-// 	image->set->b = (i & 0xFF) / 255;
-
-// 	printf("r = %d", image->set->r);
-// 	printf("i = %d", i);
-	
-// }
-
-int	select_color(int iter, t_image *image)
+uint32_t	color_by_iteration(t_image *image)
 {
-	int	r;
-	int	g;
-	int	b;
-	int	a;
-	int i;
-	double x;
-	double res;
-	double y;
-
-	if (iter == image->set->max_iter)
-		return (get_rgba(0,0,0));
-
-	x = iter - log(log(image->set->z_re * image->set->z_re + image->set->z_im * image->set->z_im));
-	// x = iter - log(log(image->set->z_real)/ log(256))/log(2.0);
-
-	y = 2 * 3.14 * x;
-	res = (1 + cos(y)) / 2;
-	//x = log(iter);
-	// printf("x is: %f\n", x);
-	// printf("iter is: %d\n", iter);
-	// printf("res is: %f\n", res);
-	//x = log(iter)
-	
-	i = get_color(iter % 16, image);
-	// convert_hex(i, image);
-	// if (iter > 1)
-	// 	printf("iter is: %d", iter);
-	r = image->set->r * iter / image->set->max_iter;
-	g = image->set->g * iter / image->set->max_iter;
-	b = image->set->b * iter / image->set->max_iter;
-	// r = image->set->r * res;
-	// g = image->set->g * res;
-	// b = image->set->b * res;
-	a = 255;
-	
-	// if (iter == image->set->max_iter)
-	// 	return (get_rgba(252, 174, 187 ,255));
-	return (get_rgba(r,g,b));
-}
-
-//greenbriar: 4b9b69
-// double a = n+2 - log(log(zr*zr+zi*zi))/M_LN2;
-// sn = n - log2log2(z * z ) + k;
-
-void		put_pixel(t_image *image, int x, int y)
-{
-	uint32_t color;
-
 	if (image->set->iter == image->set->max_iter)
-		mlx_put_pixel(image->g_img, x, y, 0x0035036a);
-	else
-		color = generate_colors(image);
-		mlx_put_pixel(image->g_img, x, y, color);
+		return(get_rgba(0,0,0));
+	return (generate_colors(image));
 }
 
-uint32_t    generate_colors(t_image *image)
+void	put_pixel(t_image *image, int pix_x, int pix_y)
+{
+	int color;
+
+	color = color_by_iteration(image);
+	// color = generate_colors(image);
+	mlx_put_pixel(image->g_img, pix_x, pix_y, color);
+}
+
+int   generate_colors(t_image *image)
 {
     t_set	*set;
 	double  ratio;
     double  ratio_reciprocal;
-    uint8_t colors[3];
+    int colors[3];
 	
 	set = image->set;
     ratio = (double)set->iter / (double)set->max_iter;
@@ -143,23 +86,23 @@ uint32_t    generate_colors(t_image *image)
     colors[0] = 9 * (ratio * ratio * ratio) * ratio_reciprocal * 255;
     colors[1] = 15 * (ratio * ratio) * (ratio_reciprocal * ratio_reciprocal) * 255;
     colors[2] = 9 * ratio * (ratio_reciprocal * ratio_reciprocal * ratio_reciprocal) * 255;
-	// printf("%d\n", get_rgba(colors[set->i], colors[set->j], colors[set->k]));
-    return (get_rgba(colors[set->i], colors[set->j], colors[set->k]));
+    return  (get_rgba(colors[set->i], colors[set->j], colors[set->k]));
 }
-// int change_color(t_set *set)
-// {
-//     if (set->i < 2)
-//     {
-//         if (set->j < 2)
-//         {
-//             if (set->k < 2)
-//                 return (set->k++);
-//             return (set->j++);
-//         }
-//         set->j = 0;
-//         set->k = 0;
-//         return (set->i++);
-//     }
-//     set->i = 0;
-//     return (1);
-// }
+
+int change_color(t_set *set)
+{
+    if (set->i < 2)
+    {
+        if (set->j < 2)
+        {
+            if (set->k < 2)
+                return (set->k++);
+            return (set->j++);
+        }
+        set->j = 0;
+        set->k = 0;
+        return (set->i++);
+    }
+    set->i = 0;
+    return (1);
+}
