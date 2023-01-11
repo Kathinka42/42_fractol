@@ -6,16 +6,22 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:40:16 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/10 15:16:08 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:36:56 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	init_set(t_set *set)
+void	init_mandelbrot(t_image *image)
 {
+	t_set *set;
+
+	set = image->set;
+	image->mlx = mlx_init(WIDTH, HEIGHT, "Mandelbrot", true);
+	if (!image->mlx)
+		exit(EXIT_FAILURE);
 	set->iter = 0;
-	set->max_iter = 0;
+	set->max_iter = 200;
 	set->max_im = 2.0;
 	set->max_re = 2.0;
 	set->min_im = -2.0;
@@ -28,3 +34,26 @@ void	init_set(t_set *set)
 	set->coef_im = set->height_of_axe / HEIGHT;
 	set->coef_re = set->width_of_axe / WIDTH;
 }
+
+void	init_set(t_image *image)
+{
+	t_set *set;
+
+	set = image->set;
+	set->r = 0;
+	set->g	= 0;
+	set->b	= 0;
+	set->i	= 0;
+	set->j	= 0;
+	set->k	= 0;
+	
+	if (image->set->settype == 1)
+		init_mandelbrot(image);
+	else
+		init_mandelbrot(image);
+	// 	return ;
+	// if (ft_strncmp(image->set->settype, "julia", 6))
+	// 	printf("JULIA");
+}
+
+
