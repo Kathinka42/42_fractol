@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:56:33 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/10 10:34:04 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/11 10:57:52 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,23 @@
 
 static mlx_image_t	*g_img;
 
-void my_keyhook(mlx_key_data_t keydata, void *param)
-{
-	// If we PRESS the 'J' key, print "Hello".
-	if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
-		puts("Hello ");
+// void my_keyhook(mlx_key_data_t keydata, void *param)
+// {
+// 	// If we PRESS the 'J' key, print "Hello".
+// 	if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
+// 		puts("Hello ");
 
-	// If we RELEASE the 'K' key, print "World".
-	if (keydata.key == MLX_KEY_K && keydata.action == MLX_RELEASE)
-		puts("World");
+// 	// If we RELEASE the 'K' key, print "World".
+// 	if (keydata.key == MLX_KEY_K && keydata.action == MLX_RELEASE)
+// 		puts("World");
 
-	// If we HOLD the 'L' key, print "!".
-	if (keydata.key == MLX_KEY_L && keydata.action == MLX_REPEAT)
-		puts("!");
+// 	// If we HOLD the 'L' key, print "!".
+// 	if (keydata.key == MLX_KEY_L && keydata.action == MLX_REPEAT)
+// 		puts("!");
 	
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE && keydata.modifier == MLX_CONTROL)
-		puts("Gotta grab it all!");
-}
+// 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE && keydata.modifier == MLX_CONTROL)
+// 		puts("Gotta grab it all!");
+// }
 
 // void my_scrollhook(double xdelta, double ydelta, t_image *image)
 // {
