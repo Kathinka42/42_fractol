@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 15:45:38 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/13 13:22:45 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/13 15:18:07 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 /*	DRAW_FRACTAL
 *	-------------
-*	Central function of the program. The function iterates through each pixel in
-*	the window. To be able to apply the mandelbrot fomula to the image, for each
-*	pixel the corresponding coordinates on the real and the imaginary axis need
-*	to be calculated.
- calculate the number of iterations for each point and put
-*	a particular color to it.
+*	The function iterates through each pixel in the window. To be able to apply
+*	the mandelbrot or julia formula to the image, for each pixel the
+*	corresponding coordinates on the real and the imaginary axis need to be
+*	calculated.
+*	Then, the program calculates the number of iterations for each point and
+*	puts a particular color to it.
 */
 
 void	draw_fractal(t_image *image)
@@ -37,11 +37,13 @@ void	draw_fractal(t_image *image)
 		while (pix_x < WIDTH)
 		{
 			image->set->c_re = image->set->min_re + pix_x * image->set->coef_re;
-			image->set->iter = count_iterations(image->set);
+			if (image->set->settype == 1)
+				image->set->iter = count_iterations_mandelbrot(image->set);
+			else if (image->set->settype == 2)
+				image->set->iter = count_iterations_julia(image->set);
 			put_pixel(image, pix_x, pix_y);
 			pix_x++;
 		}
 		pix_y++;
 	}
-	// mlx_image_to_window(image->mlx, image->g_img, pix_x, pix_y);
 }
