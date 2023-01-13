@@ -6,7 +6,7 @@
 #    By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 14:15:23 by kczichow          #+#    #+#              #
-#    Updated: 2023/01/13 11:25:48 by kczichow         ###   ########.fr        #
+#    Updated: 2023/01/13 15:23:29 by kczichow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ SRCS_F		= main.c \
 			  allocate_memory.c \
 			  init_set.c \
 			  print_instructions.c \
-			  count_iterations.c \
 			  draw_fractal.c \
 			  select_color.c \
 			  get_rgba.c \
@@ -38,7 +37,7 @@ SRCS_F		= main.c \
 			  clean_up.c \
 			  julia.c \
 			  ft_atof.c
-
+			  
 SRCS_O		= $(addprefix $(OBJS_D)/, $(SRCS_F:%.c=%.o))
 
 # compilation rules and flags
