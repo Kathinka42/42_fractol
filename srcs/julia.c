@@ -6,11 +6,22 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 10:05:11 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/13 13:57:05 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/13 15:13:55 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+/*	CALCULATE_JULIA
+*	-------------------------
+*	Function calculates the next interation of Z, split up into both a real
+*	and an imaginary part.
+*	Basic function is Z(n+1) = Z(n)*Z(n) + C, where Z(n+1) is the next
+*	iteration. Both, Z and C can be split up in imaginary and real parts, e.g.
+*	c = c_imag + c_real.
+*	In contrary to the Mandelbrot set, within the Julia set, the parameters of
+*	C remain constant and are passed from the user to the command line.
+*/
 
 void	calculate_julia(t_set *set)
 {
@@ -20,6 +31,14 @@ void	calculate_julia(t_set *set)
 	set->z_im = 2 * set->z_re * set->z_im + set->const_im;
 	set->z_re = tmp_re + set->const_re;
 }
+
+/*	COUNT_ITERATIONS_JULIA
+*	-----------------------------
+*	Function counts the number of iterations for a particular point in the
+*	coordinating system, for which Z remains within the boundaries of the set.
+*	In contrary to the Mandelbrot set, Z does not start from the center, but
+*	from each individual point in the coordinating system.
+*/
 
 int	count_iterations_julia(t_set *set)
 {
@@ -33,31 +52,4 @@ int	count_iterations_julia(t_set *set)
 		set->iter++;
 	}
 	return (set->iter);
-}
-
-void	draw_julia(t_image *image)
-{
-	int pix_x;
-	int pix_y;
-	
-	image->set->iter = 0;
-	// change_color(image->set);
-	
-	pix_y = 0;
-	while (pix_y < HEIGHT)
-	{
-		pix_x = 0;
-		image->set->c_im = image->set->max_im - pix_y * image->set->coef_im;
-
-		while (pix_x < WIDTH)
-		{
-			image->set->c_re = image->set->min_re + pix_x * image->set->coef_re;
-			image->set->iter = count_iterations_julia(image->set);
-			// image->set->iter = count_iterations(image->set);
-			put_pixel(image, pix_x, pix_y);
-			pix_x++;
-		}
-		pix_y++;
-	}
-	// mlx_image_to_window(image->mlx, image->g_img, pix_x, pix_y);
 }
