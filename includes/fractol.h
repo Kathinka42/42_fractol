@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:33:12 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/13 13:54:48 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/13 15:14:57 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,8 @@ void	print_instructions(void);
 double ft_atof(char *str);
 
 void		draw_fractal(t_image *image);
-void	draw_julia(t_image *image);
-int			count_iterations(t_set *set);
-int	count_iterations_julia(t_set *set);
+int			count_iterations_julia(t_set *set);
+int			count_iterations_mandelbrot(t_set *set);
 
 void		mandelbrot();
 void		fractol(char **argv, t_image *image);
