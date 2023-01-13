@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:40:16 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/11 13:36:56 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/13 13:53:56 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,13 @@ void	init_mandelbrot(t_image *image)
 	set->coef_re = set->width_of_axe / WIDTH;
 }
 
-void	init_set(t_image *image)
+void	init_julia(t_set *set, char *floating1, char *floating2)
+{
+	set->const_re = ft_atof(floating1);
+	set->const_im = ft_atof(floating2);
+}
+
+void	init_set(int argc, char **argv, t_image *image)
 {
 	t_set *set;
 
@@ -49,11 +55,11 @@ void	init_set(t_image *image)
 	
 	if (image->set->settype == 1)
 		init_mandelbrot(image);
-	else
+	else if (image->set->settype ==2)
+	{
+		init_julia(image->set, argv[2], argv[3]);
 		init_mandelbrot(image);
-	// 	return ;
-	// if (ft_strncmp(image->set->settype, "julia", 6))
-	// 	printf("JULIA");
+	}
 }
 
 
