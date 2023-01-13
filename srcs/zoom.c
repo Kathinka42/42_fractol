@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:18:06 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/11 10:37:52 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/13 14:19:51 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,8 @@ void	my_scrollhook(double xdelta, double ydelta, void *param)
 	set->width_of_axe = set->max_re - set->min_re;
 	set->coef_im = set->height_of_axe / HEIGHT;
 	set->coef_re = set->width_of_axe / WIDTH;
-	draw_fractal(image);
+	if (set->settype == 1)
+		draw_fractal(image);
+	else if (set->settype == 2)
+		draw_julia(image);
 }
