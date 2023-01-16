@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+         #
+#    By: kczichowsky <kczichowsky@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 14:15:23 by kczichow          #+#    #+#              #
-#    Updated: 2023/01/16 15:11:40 by kczichow         ###   ########.fr        #
+#    Updated: 2023/01/16 21:08:53 by kczichowsky      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,7 +94,7 @@ all:		$(NAME)
 
 #dynamic rule to make sure Makefile does not relink
 
-$(NAME):  $(INST_BREW) $(INST_GLFW) $(LIBFT_LIB) $(MLX_LIB) $(OBJS_D) $(SRCS_O)
+$(NAME):  $(INST_BREW) $(MLX_LIB) $(INST_GLFW) $(LIBFT_LIB) $(OBJS_D) $(SRCS_O)
 	 	$(CC) -o $(NAME) $(SRCS_O) $(MLX_LNK) $(LIBFT_LNK)
 		  	
 #compiles c files to o files, is called by $(SRCS_O)
@@ -108,12 +108,24 @@ $(MLX_D):
 	
 $(INST_GLFW):
 	@echo "$(MAGENTA) INSTALLING GLFW $(RESET)"
+	brew update
 	brew install glfw
+#	git submodule update --init --recursive --remote && \
+	curl -LO https://github.com/glfw/glfw/releases/download/3.3.8/glfw-3.3.8.bin.MACOS.zip && \
+	unzip glfw-3.3.8.bin.MACOS.zip && \
+    rm glfw-3.3.8.bin.MACOS.zip && \
+	mv glfw-3.3.8.bin.MACOS/lib-universal glfw-3.3.8.bin.MACOS/glfw_lib && \
+	mv glfw-3.3.8.bin.MACOS/glfw_lib ./MLX42/ && \
+	mv glfw-3.3.8.bin.MACOS/include/GLFW ./MLX42/include && \
+	rm -rf glfw-3.3.8.bin.MACOS && \
+	echo "$(GREEN)./MLX42/glfw_lib is installed.$(DEF_COLOR)"; \
+	fi
 
 $(INST_BREW):
 	@echo "$(MAGENTA) INSTALLING BREW $(RESET)"
 	@curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh
 	@source ~/.zshrc
+		brew analytics off
 
 # -j option for multithreading
 $(LIBFT_LIB):
