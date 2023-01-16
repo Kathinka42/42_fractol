@@ -6,7 +6,7 @@
 #    By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 14:15:23 by kczichow          #+#    #+#              #
-#    Updated: 2023/01/16 11:40:05 by kczichow         ###   ########.fr        #
+#    Updated: 2023/01/16 15:11:40 by kczichow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME 		= fractol
 #OS 			= $(shell uname)
  
 # path to directories
-SRCS_D		= ./srcs
-OBJS_D		= ./obj
-INC_D		= ./includes
+SRCS_D		= srcs
+OBJS_D		= obj
+INC_D		= includes
 
 # color codes for command line messages
 
@@ -54,24 +54,26 @@ SRCS_F		= main.c \
 SRCS_O		= $(addprefix $(OBJS_D)/, $(SRCS_F:%.c=%.o))
 
 # compilation rules and flags
-CC			= gcc
+CC			= gcc -Ofast
 CFLAGS		= #-Wall -Wextra -Werror
-ifdef DEBUG
-	CFLAGS += -fsanitize=address -g
+
+#-fsanitize=address
+ifdef DEBUGG
+	CFLAGS +=  -g
 else
-	CFLAGS	+= -Ofast -D NDEBUG
+	CFLAGS	+=  -D NDEBUG
 endif
 
 # Libft lib
-LIBFT_D		= ./libft
+LIBFT_D		= libft
 LIBFT_LIB	= $(LIBFT_D)/libft.a
 LIBFT_INC 	= -I $(LIBFT_D)
 LIBFT_LNK	= -L $(LIBFT_D) -l ft
 
 
 # GLFW lib
-GLFW_D	= /Users/$(USER)/.brew/opt/glfw/lib/
-BREW_FILE 	= /Users/$(USER)/.brewconfig.zsh
+INST_GLFW	= /Users/$(USER)/.brew/opt/glfw/lib/
+INST_BREW 	= /Users/$(USER)/.brewconfig.zsh
 GLFW_LIB	= -lglfw
 
 # -I option searches directories for #include directives
@@ -82,20 +84,17 @@ GLFW_LIB	= -lglfw
 # -L specifies additional directories to be searched for libraries (where)
 
 # MLX lib
-MLX_D		= ./MLX42
-#MLX_D		= git clone https://github.com/codam-coding-college/MLX42.git ./MLX42
+MLX_D		= MLX42
 MLX_LIB		= $(MLX_D)/libmlx42.a
 MLX_INC 	= -I $(MLX_D)
-#MLX_LNK		= -L $(MLX_D) -l mlx42 -lglfw -L ~/.brew/opt/glfw/lib\
-    -framework Cocoa -framework OpenGL -framework IOKit
-MLX_LNK		= -l mlx42 -L $(MLX_D) $(GLFW_LIB) -L $(GLFW_D)\
+MLX_LNK		= -l mlx42 -L $(MLX_D) $(GLFW_LIB) -L $(INST_GLFW)\
     -framework Cocoa -framework OpenGL -framework IOKit
 
 all:		$(NAME)
 
 #dynamic rule to make sure Makefile does not relink
 
-$(NAME): $(LIBFT_LIB) $(MLX_LIB) $(OBJS_D) $(SRCS_O) $(GLFW_D)
+$(NAME):  $(INST_BREW) $(INST_GLFW) $(LIBFT_LIB) $(MLX_LIB) $(OBJS_D) $(SRCS_O)
 	 	$(CC) -o $(NAME) $(SRCS_O) $(MLX_LNK) $(LIBFT_LNK)
 		  	
 #compiles c files to o files, is called by $(SRCS_O)
@@ -103,25 +102,18 @@ $(OBJS_D)/%.o: $(SRCS_D)/%.c
 			@echo "$(CYAN)compiling: $(RESET) $<"
 			@$(CC) $(CFLAGS) $(MLX_INC) $(LIBFT_INC) -I $(INC_D) -c $< -o $@
 
-#-----------------------------
-#$(MLX42):
-#	@echo "$(MAGENTA) ----- CLONING MLX42 ----- $(RESET)"
-#	git clone https://github.com/codam-coding-college/MLX42.git
-
-$(GLFW_D):
-	@if [ -d ./MLX42/glfw_lib ]; \
-	then echo "$(GREEN)./MLX42/glfw_lib Exists, no further action required.$(DEF_COLOR)"; \
-	else \
-	echo "$(RED)./MLX42/glfw_lib Doesn't exists.$(DEF_COLOR)"; \
-	@echo "$(MAGENTA) ----- INSTALLING GLFW ----- $(RESET)"
+$(MLX_D):
+	@echo "$(RED) CLONING MLX 42 $(RESET)"
+	git clone https://github.com/codam-coding-college/MLX42.git
+	
+$(INST_GLFW):
+	@echo "$(MAGENTA) INSTALLING GLFW $(RESET)"
 	brew install glfw
 
-$(BREW_FILE):
-	@echo "$(MAGENTA) ----- INSTALLING BREW ----- $(RESET)"
+$(INST_BREW):
+	@echo "$(MAGENTA) INSTALLING BREW $(RESET)"
 	@curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh
 	@source ~/.zshrc
-#-------------------------------
-	
 
 # -j option for multithreading
 $(LIBFT_LIB):

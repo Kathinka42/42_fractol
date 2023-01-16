@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:18:06 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/13 14:55:43 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/16 16:27:39 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 *	Function readjusts the values of the axis.
 */
 
-void	zoom_in(t_image *image)
+void	zoom_out(t_image *image)
 {
 	t_set	*set;
 
 	set = image->set;
-	set->max_im = set->max_im + 0.05;
-	set->min_im = set->min_im - 0.05;
-	set->max_re = set->max_re + 0.05;
-	set->min_re = set->min_re - 0.05;
+	set->max_im = set->max_im * 1.1;
+	set->min_im = set->min_im * 1.1;
+	set->max_re = set->max_re * 1.1;
+	set->min_re = set->min_re * 1.1;
 }
 
 /*	ZOOM_OUT
@@ -33,15 +33,15 @@ void	zoom_in(t_image *image)
 *	Function readjusts the values of the axis.
 */
 
-void	zoom_out(t_image *image)
+void	zoom_in(t_image *image)
 {
 	t_set	*set;
 
 	set = image->set;
-	set->max_im = set->max_im - 0.05;
-	set->min_im = set->min_im + 0.05;
-	set->max_re = set->max_re - 0.05;
-	set->min_re = set->min_re + 0.05;
+	set->max_im = set->max_im * 0.9;
+	set->min_im = set->min_im * 0.9;
+	set->max_re = set->max_re * 0.9;
+	set->min_re = set->min_re * 0.9;
 }
 
 /*	MY_SCROLLHOOK
@@ -62,9 +62,9 @@ void	my_scrollhook(double xdelta, double ydelta, void *param)
 	set = image->set;
 	(void) xdelta;
 	if (ydelta > 0)
-		zoom_in(image);
-	else if (ydelta < 0)
 		zoom_out(image);
+	else if (ydelta < 0)
+		zoom_in(image);
 	set->height_of_axe = set->max_im - set->min_im;
 	set->width_of_axe = set->max_re - set->min_re;
 	set->coef_im = set->height_of_axe / HEIGHT;

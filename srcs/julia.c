@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 10:05:11 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/13 15:13:55 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/16 15:46:58 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	calculate_julia(t_set *set)
 	double tmp_re;
 
 	tmp_re = set->z_re * set->z_re - set->z_im * set->z_im;
-	set->z_im = 2 * set->z_re * set->z_im + set->const_im;
+	set->z_im = 2.0 * set->z_re * set->z_im + set->const_im;
 	set->z_re = tmp_re + set->const_re;
 }
 

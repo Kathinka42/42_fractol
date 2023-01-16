@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:14:48 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/16 12:00:32 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/16 17:05:43 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,14 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 		change_color(image);
 		draw_fractal(image);
 	}
+	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
+	{
+		image->set->settype = 1;
+		draw_fractal(image);
+	}
 	if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
-		puts("Hello ");
+	{
+		image->set->settype = 2;
+		draw_fractal(image);
+	}
 }
-
-// oid my_keyhook1(mlx_key_data_t keydata, void *param)
-// {
-// 	// If we PRESS the 'J' key, print "Hello".
-// 	if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
-// 		puts("Hello ");
-
-// 	// If we RELEASE the 'K' key, print "World".
-// 	if (keydata.key == MLX_KEY_K && keydata.action == MLX_RELEASE)
-// 		puts("World");
-
-// 	// If we HOLD the 'L' key, print "!".
-// 	if (keydata.key == MLX_KEY_L && keydata.action == MLX_REPEAT)
-// 		puts("!");
-	
-// 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE && keydata.modifier == MLX_CONTROL)
-// 		puts("Gotta grab it all!");
-// }

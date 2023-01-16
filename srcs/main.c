@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 10:56:33 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/11 10:57:52 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/16 17:03:24 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,4 +133,22 @@ void	hook(void *param)
 	// fractol(argv, image);
 	// select_color(21, image);
 // 	return (0);
+// }
+
+// void my_keyhook1(mlx_key_data_t keydata, void *param)
+// {
+// 	// If we PRESS the 'J' key, print "Hello".
+// 	if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
+// 		puts("Hello ");
+
+// 	// If we RELEASE the 'K' key, print "World".
+// 	if (keydata.key == MLX_KEY_K && keydata.action == MLX_RELEASE)
+// 		puts("World");
+
+// 	// If we HOLD the 'L' key, print "!".
+// 	if (keydata.key == MLX_KEY_L && keydata.action == MLX_REPEAT)
+// 		puts("!");
+	
+// 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE && keydata.modifier == MLX_CONTROL)
+// 		puts("Gotta grab it all!");
 // }
