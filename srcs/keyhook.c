@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:14:48 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/11 13:52:32 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/16 12:00:32 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 	mlx = image->mlx;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		clean_up(image);
+	if (keydata.key == MLX_KEY_P && keydata.action == MLX_PRESS)
+	{
+		change_color(image);
+		draw_fractal(image);
+	}
+	if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
+		puts("Hello ");
 }
 
 // oid my_keyhook1(mlx_key_data_t keydata, void *param)

@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:33:12 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/13 15:14:57 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/16 12:01:18 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,25 @@ typedef struct s_set
 	double	coef_re;
 	double	height_of_axe;
 	double	width_of_axe;
+}	t_set;
+
+typedef struct s_color
+{
 	double	r;
 	double	g;
 	double	b;
 	int		i;
 	int		j;
 	int		k;
-}	t_set;
+}	t_color;
 
 typedef struct s_image
 {
 	mlx_t			*mlx;
 	mlx_image_t		*g_img;
 	t_set			*set;
-}t_image;
+	t_color			*color;
+}	t_image;
 
 # ifndef WIDTH
 #  define WIDTH 800
@@ -82,7 +87,7 @@ void		fractol(char **argv, t_image *image);
 int			select_color(int iter, t_image *image);
 uint32_t	get_rgba(uint8_t red, uint8_t green, uint8_t blue);
 int   		generate_colors(t_image *image);
-int			change_color(t_set *set);
+int			change_color(t_image *image);
 void		put_pixel(t_image *image, int pix_x, int pix_y);
 uint32_t	color_by_iteration(t_image *image);
 
