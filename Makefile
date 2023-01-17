@@ -6,7 +6,7 @@
 #    By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 14:15:23 by kczichow          #+#    #+#              #
-#    Updated: 2023/01/17 11:00:03 by kczichow         ###   ########.fr        #
+#    Updated: 2023/01/17 11:30:15 by kczichow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,7 @@ all:		$(NAME)
 
 #dynamic rule to make sure Makefile does not relink
 
-$(NAME):  $(INST_BREW) $(MLX_LIB) $(INST_GLFW) $(LIBFT_LIB) $(OBJS_D) $(SRCS_O)
+$(NAME):  $(INST_BREW) $(MLX_D) $(MLX_LIB) $(INST_GLFW) $(LIBFT_LIB) $(OBJS_D) $(SRCS_O)
 	 	$(CC) -o $(NAME) $(SRCS_O) $(MLX_LNK) $(LIBFT_LNK)
 		  	
 #compiles c files to o files, is called by $(SRCS_O)
@@ -111,11 +111,11 @@ $(INST_BREW):
 
 # -j option for multithreading
 $(LIBFT_LIB):
-	make -j -C $(LIBFT_D)
+	make -C $(LIBFT_D)
 
 # -j option for multithreading
 $(MLX_LIB):
-	make -j -C $(MLX_D)
+	make -C $(MLX_D)
 
 $(OBJS_D):
 	mkdir $@
