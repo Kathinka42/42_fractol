@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kczichowsky <kczichowsky@student.42.fr>    +#+  +:+       +#+         #
+#    By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 14:15:23 by kczichow          #+#    #+#              #
-#    Updated: 2023/01/16 21:08:53 by kczichowsky      ###   ########.fr        #
+#    Updated: 2023/01/17 11:00:03 by kczichow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,23 +33,16 @@ RESET	= \033[0m
 
 # source and objects files
 
-SRCS_F		= main.c \
-			  check_input.c \
-			  param_is_valid.c \
-			  allocate_memory.c \
+SRCS_F		= check_input.c \
+			  manage_memory.c \
 			  init_set.c \
-			  print_instructions.c \
 			  draw_fractal.c \
-			  select_color.c \
-			  get_rgba.c \
-			  mandelbrot.c \
+			  manage_colors.c \
 			  fractol.c \
-			  temp_drawing_experiments.c \
+			  mandelbrot.c \
+			  julia.c \
 			  zoom.c \
 			  keyhook.c \
-			  clean_up.c \
-			  julia.c \
-			  ft_atof.c
 			  
 SRCS_O		= $(addprefix $(OBJS_D)/, $(SRCS_F:%.c=%.o))
 
@@ -110,22 +103,11 @@ $(INST_GLFW):
 	@echo "$(MAGENTA) INSTALLING GLFW $(RESET)"
 	brew update
 	brew install glfw
-#	git submodule update --init --recursive --remote && \
-	curl -LO https://github.com/glfw/glfw/releases/download/3.3.8/glfw-3.3.8.bin.MACOS.zip && \
-	unzip glfw-3.3.8.bin.MACOS.zip && \
-    rm glfw-3.3.8.bin.MACOS.zip && \
-	mv glfw-3.3.8.bin.MACOS/lib-universal glfw-3.3.8.bin.MACOS/glfw_lib && \
-	mv glfw-3.3.8.bin.MACOS/glfw_lib ./MLX42/ && \
-	mv glfw-3.3.8.bin.MACOS/include/GLFW ./MLX42/include && \
-	rm -rf glfw-3.3.8.bin.MACOS && \
-	echo "$(GREEN)./MLX42/glfw_lib is installed.$(DEF_COLOR)"; \
-	fi
 
 $(INST_BREW):
 	@echo "$(MAGENTA) INSTALLING BREW $(RESET)"
 	@curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh
 	@source ~/.zshrc
-		brew analytics off
 
 # -j option for multithreading
 $(LIBFT_LIB):
