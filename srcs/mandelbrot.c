@@ -19,9 +19,9 @@
 *	Basic function is Z(n+1) = Z(n)*Z(n) + C, where Z(n+1) is the next
 *	iteration. Both, Z and C can be split up in imaginary and real parts, e.g.
 *	c = c_imag + c_real.
-*	c_imag and c_real are equal to the point in the coordinating system on which
-*	the iteration is executed and are input parameters to the count iterations
-*	function.
+*	c_imag and c_real are equal to the point in the coordinating system on
+*	which the iteration is executed and are input parameters to the count
+*	iterations function.
 */
 
 void	calculate_mandelbrot(t_set *set)
@@ -47,7 +47,7 @@ int	count_iterations_mandelbrot(t_set *set)
 	set->z_re = 0.0;
 	set->z_im = 0.0;
 	while (set->iter < set->max_iter
-			&& (pow(set->z_re, 2) + pow(set->z_im, 2)) < 4.0)
+		&& (pow(set->z_re, 2) + pow(set->z_im, 2)) < 4.0)
 	{
 		calculate_mandelbrot(set);
 		set->iter++;

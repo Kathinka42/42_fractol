@@ -6,7 +6,7 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 10:05:11 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/16 15:46:58 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/17 10:43:34 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 void	calculate_julia(t_set *set)
 {
-	double tmp_re;
+	double	tmp_re;
 
 	tmp_re = set->z_re * set->z_re - set->z_im * set->z_im;
 	set->z_im = 2.0 * set->z_re * set->z_im + set->const_im;
@@ -46,7 +46,7 @@ int	count_iterations_julia(t_set *set)
 	set->z_re = set->c_re;
 	set->z_im = set->c_im;
 	while (set->iter < set->max_iter
-			&& (pow(set->z_re, 2) + pow(set->z_im, 2)) < 4.0)
+		&& (pow(set->z_re, 2) + pow(set->z_im, 2)) < 4.0)
 	{
 		calculate_julia(set);
 		set->iter++;
