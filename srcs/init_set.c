@@ -6,12 +6,16 @@
 /*   By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:40:16 by kczichow          #+#    #+#             */
-/*   Updated: 2023/01/16 17:07:22 by kczichow         ###   ########.fr       */
+/*   Updated: 2023/01/17 10:43:02 by kczichow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+/*	INIT_PARAMETERS
+*	----------------
+*	initialize parameters.
+*/
 void	init_parameters(t_image *image)
 {
 	t_set	*set;
@@ -31,38 +35,53 @@ void	init_parameters(t_image *image)
 	set->const_im = 0.8;
 }
 
+/*	INIT_JULIA
+*	-----------
+*	constant parameters are being read from the command line.
+*/
+
 void	init_julia(t_set *set, char *floating1, char *floating2)
 {
 	set->const_re = ft_atof(floating1);
 	set->const_im = ft_atof(floating2);
 }
 
+/*	INIT_COLOR
+*	-----------
+*	set initial values to colors.
+*/
+
 void	init_color(t_color *color)
 {
-	color->r	= 0;
-	color->g	= 0;
-	color->b	= 0;
-	color->i	= 0;
-	color->j	= 1;
-	color->k	= 2;
+	color->r = 0;
+	color->g = 0;
+	color->b = 0;
+	color->i = 0;
+	color->j = 1;
+	color->k = 2;
 }
+
+/*	INIT_SET
+*	---------
+*	initialize mlx, color and parameters.
+*/
 
 void	init_set(int argc, char **argv, t_image *image)
 {
 	if (image->set->settype == 1)
 	{
 	image->mlx = mlx_init(WIDTH, HEIGHT, "Mandelbrot", true);
-	if (!image->mlx)
-		exit(EXIT_FAILURE);
+		if (!image->mlx)
+			exit(EXIT_FAILURE);
 	}
 	if (image->set->settype == 2)
 	{
 	image->mlx = mlx_init(WIDTH, HEIGHT, "Julia", true);
-	if (!image->mlx)
-		exit(EXIT_FAILURE);
+		if (!image->mlx)
+			exit(EXIT_FAILURE);
 	}
 	init_color(image->color);
 	init_parameters(image);
-	if (image->set->settype ==2)
+	if (image->set->settype == 2)
 		init_julia(image->set, argv[2], argv[3]);
 }
