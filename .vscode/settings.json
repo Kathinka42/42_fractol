@@ -19,6 +19,7 @@
 		"tuple": "c",
 		"utility": "c",
 		"__node_handle": "c",
-		"iterator": "c"
+		"iterator": "c",
+		"math.h": "c"
 	}
 }
