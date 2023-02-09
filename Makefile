@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kczichow <kczichow@student.42.fr>          +#+  +:+       +#+         #
+#    By: kczichowsky <kczichowsky@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 14:15:23 by kczichow          #+#    #+#              #
-#    Updated: 2023/01/17 11:30:15 by kczichow         ###   ########.fr        #
+#    Updated: 2023/02/09 10:00:58 by kczichowsky      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,7 @@ all:		$(NAME)
 
 #dynamic rule to make sure Makefile does not relink
 
-$(NAME):  $(INST_BREW) $(MLX_D) $(MLX_LIB) $(INST_GLFW) $(LIBFT_LIB) $(OBJS_D) $(SRCS_O)
+$(NAME):  $(INST_BREW) $(INST_GLFW) $(MLX_D) $(MLX_LIB) $(LIBFT_LIB) $(OBJS_D) $(SRCS_O)
 	 	$(CC) -o $(NAME) $(SRCS_O) $(MLX_LNK) $(LIBFT_LNK)
 		  	
 #compiles c files to o files, is called by $(SRCS_O)
